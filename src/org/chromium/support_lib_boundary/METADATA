@@ -1,0 +1,20 @@
+# Format: google3/devtools/metadata/metadata.proto (go/google3metadata)
+
+name: "android_webview/support_library/boundary_interfaces"
+description: "Boundary interfaces for the Android WebView Support Library (AndroidX WebKit)."
+
+third_party {
+  identifier {
+    type: "Git"
+    value: "https://chromium.googlesource.com/chromium/src"
+    version: "7c4516b7253e43199984cb79c3097782c91a3cbc"
+    primary_source: true
+  }
+  version: "7c4516b7253e43199984cb79c3097782c91a3cbc"
+  last_upgrade_date {
+    year: 2026
+    month: 11
+    day: 4
+  }
+  license_type: NOTICE
+}
