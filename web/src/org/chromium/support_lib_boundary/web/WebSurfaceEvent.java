@@ -28,12 +28,7 @@ import java.lang.annotation.Target;
 })
 @Retention(RetentionPolicy.SOURCE)
 public @interface WebSurfaceEvent {
-    /**
-     * Reports that the WebSurface needs to be redrawn.
-     *
-     * <p>Pack with {@link WebSurfaceEventPacker#packInvalidate} and unpack with {@link
-     * WebSurfaceEventPacker#unpackInvalidate}.
-     */
+    /** Reports that the WebSurface needs to be redrawn. The event payload is {@code null}. */
     int INVALIDATE = 0;
 
     /**

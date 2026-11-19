@@ -133,8 +133,4 @@ public interface ProfileBoundaryInterface {
     void setCrossOriginIsolatedAllowList(Set<String> originPatterns);
 
     Set<String> getCrossOriginIsolatedAllowList();
-
-    void configureIsolatedSites(Set<String> sites);
-
-    boolean canConfigureIsolatedSites();
 }
