@@ -7,10 +7,10 @@ third_party {
   identifier {
     type: "Git"
     value: "https://chromium.googlesource.com/chromium/src"
-    version: "26d7a671193446d2a6a110e8c6742cc3d05fcd3e"
+    version: "0eb91a17a90f8303a87192bf8ee8e60e54e14d65"
     primary_source: true
   }
-  version: "26d7a671193446d2a6a110e8c6742cc3d05fcd3e"
+  version: "0eb91a17a90f8303a87192bf8ee8e60e54e14d65"
   last_upgrade_date {
     year: 2026
     month: 11
