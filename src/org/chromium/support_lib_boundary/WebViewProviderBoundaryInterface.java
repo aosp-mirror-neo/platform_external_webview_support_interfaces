@@ -5,20 +5,39 @@
 package org.chromium.support_lib_boundary;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebViewClient;
+
+import androidx.annotation.IntDef;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationHandler;
+import java.util.Map;
 import java.util.concurrent.Executor;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
-/** */
 @NullMarked
 public interface WebViewProviderBoundaryInterface {
+    @IntDef({
+        JavaScriptInjectionTime.DOCUMENT_START,
+        JavaScriptInjectionTime.DOCUMENT_END,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    @interface JavaScriptInjectionTime {
+        int DOCUMENT_START = 0;
+        int DOCUMENT_END = 1;
+    }
+
     void insertVisualStateCallback(
             long requestId, /* VisualStateCallback */ InvocationHandler callback);
 
@@ -69,4 +88,60 @@ public interface WebViewProviderBoundaryInterface {
             /* SpeculativeLoadingParameters */ InvocationHandler speculativeLoadingParameters,
             ValueCallback<Void> activationCallback,
             ValueCallback<Throwable> errorCallback);
+
+    /* Navigation */ InvocationHandler navigate(
+            String url, /* NavigationParams */ InvocationHandler params);
+
+    void saveState(Bundle outState, int maxSize, boolean includeForwardState);
+
+    byte @Nullable [] serializeState(int maxSize, boolean includeForwardState);
+
+    boolean restoreState(byte[] state);
+
+    void addWebViewNavigationListener(
+            Executor executor, /* WebViewNavigationListener */ InvocationHandler listener);
+
+    void removeWebViewNavigationListener(
+            /* WebViewNavigationListener */ InvocationHandler listener);
+
+    /* WebViewNavigationClient */ @Nullable InvocationHandler getWebViewNavigationClient();
+
+    void setWebViewNavigationClient(
+            /* WebViewNavigationClient */ @Nullable InvocationHandler webViewNavigationClient);
+
+    /* ScriptHandler */ InvocationHandler addJavaScriptOnEvent(
+            String script,
+            String[] allowedOriginRules,
+            @JavaScriptInjectionTime int event,
+            String worldName);
+
+    void addWebMessageListener(
+            String jsObjectName,
+            String[] allowedOriginRules,
+            /* WebMessageListener */ InvocationHandler listener,
+            String worldName);
+
+    void removeWebMessageListener(String jsObjectName, String worldName);
+
+    int getJavaScriptWorld(String worldName);
+
+    Runnable addHeaderInterceptor(
+            Consumer<BiConsumer<@RequestMatcherConfig Integer, Object>> buildRequestMatcherConfig,
+            Function<WebResourceRequest, Map<String, @Nullable String>> headerInterceptor);
+
+    void setGoogleAccountsCallback(
+            String accountId,
+            Executor executor,
+            Consumer</* GoogleAccountsEvent */ InvocationHandler> consumer);
+
+    void clearGoogleAccountsCallback();
+
+    /**
+     * Sets the handler for downloads started in this WebView. WebView passes each download to
+     * {@code downloadHandler} by calling {@code executor.execute()} on the WebView's UI thread.
+     */
+    void setDownloadHandler(
+            Executor executor, /* DownloadHandler */ InvocationHandler downloadHandler);
+
+    void clearDownloadHandler();
 }

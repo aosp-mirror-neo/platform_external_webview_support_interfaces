@@ -6,11 +6,13 @@ package org.chromium.support_lib_boundary;
 
 import android.content.Context;
 import android.net.Uri;
+import android.system.ErrnoException;
 import android.webkit.ValueCallback;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.lang.reflect.InvocationHandler;
 import java.util.List;
 import java.util.Set;
 
@@ -32,4 +34,7 @@ public interface StaticsBoundaryInterface {
     void setDefaultTrafficStatsTag(int tag);
 
     void setDefaultTrafficStatsUid(int uid);
+
+    /* SharedArrayBuffer */ InvocationHandler createSharedArrayBuffer(
+            @Nullable String name, long size) throws ErrnoException;
 }
