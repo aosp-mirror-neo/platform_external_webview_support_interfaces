@@ -573,7 +573,7 @@ public class Features {
     public static final String GOOGLE_ACCOUNTS_CALLBACK = "GOOGLE_ACCOUNTS_CALLBACK_V1";
 
     // WebSettingsCompat.setWebGraphicsEnabled
-    // WebSettingsCompat.getWebGraphicsEnabled
+    // WebSettingsCompat.isWebGraphicsEnabled
     public static final String WEB_GRAPHICS_ENABLED = "WEB_GRAPHICS_ENABLED";
 
     // WebGPU.getWGPUProcGetProcAddress
@@ -586,6 +586,9 @@ public class Features {
     // WebDownload.getMimeType
     // WebDownload.getContentLength
     // WebDownload.getSuggestedFilename
+    // WebDownload.isExplicitDownload
+    // WebDownload.isForMainFrame
+    // WebDownload.hasGesture
     // WebDownload.saveTo
     // WebDownload.cancel
     public static final String DOWNLOAD_HANDLER = "DOWNLOAD_HANDLER";
